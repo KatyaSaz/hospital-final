@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "patients")
-public class Patient {
+public class Patient{
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
@@ -26,13 +26,17 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    @Column(name="birthDate")
-    private LocalDate birthDate;
+    @Column(name="year")
+    private int year;
     private String phone;
     @ManyToOne
     @JoinColumn(name="doc_id", nullable=false)
     private Doctor doctor;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
     private List<CardRecord> records;
+
 
 }

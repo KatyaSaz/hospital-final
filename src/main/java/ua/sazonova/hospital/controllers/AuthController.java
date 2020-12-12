@@ -39,6 +39,7 @@ public class AuthController {
 
         model.addAttribute("user", user);
 
+
         if(user.getRole().equals(Role.DOCTOR)){
             return "redirect:/doctor/"+user.getIdMoreInfo();
         }else if(user.getRole().equals(Role.PATIENT)){

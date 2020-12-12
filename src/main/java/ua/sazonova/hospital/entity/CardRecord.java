@@ -17,11 +17,12 @@ public class CardRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate date;
+    @Enumerated(EnumType.STRING)
     @Column(name="record_type")
     private RecordType recordType;
+    @Column(name="description")
     private String description;
     @ManyToOne
-    @JoinColumn(name="id_patient", nullable=false)
+    @JoinColumn(name= "pat_id", nullable=false)
     private Patient patient;
 }

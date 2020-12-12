@@ -1,7 +1,6 @@
 package ua.sazonova.hospital.entity;
 
 import lombok.*;
-import org.springframework.security.core.userdetails.UserDetails;
 import ua.sazonova.hospital.entity.enam.Role;
 
 import javax.persistence.*;
@@ -20,7 +19,7 @@ public class User  {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @Column(name="id_more_info")
+    @Column(name= "more_info_id")
     private int idMoreInfo;
 
 }

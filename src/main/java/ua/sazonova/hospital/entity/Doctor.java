@@ -23,5 +23,9 @@ public class Doctor {
     private int experience;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
     private List<Patient> patients;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 }
