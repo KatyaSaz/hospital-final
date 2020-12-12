@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient</title>
+</head>
+<p>
+<p th:text="${'Patient ID: ' + patient.getId()}">VALUE</p>
+<p th:text="${'Name:       ' + patient.getName()}">VALUE</p>
+<p th:text="${'Surname:    ' + patient.getSurname()}">VALUE</p>
+<p th:text="${'Gender:     ' + patient.getGender()}">VALUE</p>
+<p th:text="${'BirthDay:   ' + patient.getBirthDate()}">VALUE</p>
+<p th:text="${'Phone:      ' + patient.getPhone()}">VALUE</p>
+<!--<a th:href="@{/doctor/patients/{id}/write(id=${patient.getId()})}">Add an entry to the card</a>-->
+<form th:method="DELETE" th:action="@{/admin/patients/{id}(id=${patient.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+<br/>
+<p>---> RECORDS IN CARD <---</p>
+<p th:if="${patient.getRecords().size() == 0}">There is no records in the card yet</p>
+<div th:each="record : ${patient.getRecords()}">
+    <p th:text="${'Record Type:  ' + record.getRecordType()}">Record</p>
+    <p th:text="${'Doctors name: ' + record.getDoctorName()}">name</p>
+    <p th:text="${'Date:         ' + record.getDate()}">date</p>
+    <p th:text="${'Description:  ' + record.getDescription()}">Description</p>
+    <br/>
+</div>
+
+</body>
+</html>

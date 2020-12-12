@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor</title>
+</head>
+<body>
+<p th:text="${'Doctor ID: ' + doctor.getId()}">VALUE</p>
+<p th:text="${'Name:       ' + doctor.getName()}">VALUE</p>
+<p th:text="${'Surname:    ' + doctor.getSurname()}">VALUE</p>
+<p th:text="${'DoctorType: ' + doctor.getType()}">VALUE</p>
+<p th:text="${'Experience:   ' + doctor.getExperience() + '  years'}">VALUE</p>
+</div>
+</body>
+</html>

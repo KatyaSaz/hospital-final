@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Doctors List</title>
+</head>
+<body>
+<h2>All Doctors List</h2>
+<h3>Sort by: </h3>
+<!--th:field="*{sort}"-->
+<input type="radio"  id="name" value="female"/>Name
+<input type="radio"  id="amount" value="male"/>Amount of Patients
+<br/>
+<label for="type">By type: </label>
+<select id="type">
+    <option value="-"></option>
+    <option value="dermatologist">dermatologist</option>
+    <option value="pediatrician">pediatrician</option>
+    <option value="surgeon">surgeon</option>
+    <option value="optometrist">optometrist</option>
+</select>
+<br/>
+<input type="submit" value="Sort"/>
+
+<!--<ul>-->
+<!--    -->
+<!--    <li><a th:href="@{/admin/doctors}">Name</a></li>-->
+<!--    <li><a th:href="@{/admin/doctors}">Amount of patients</a></li>-->
+<!--    <label for="type">Choose type: </label>-->
+<!--</ul>-->
+<hr/>
+<div th:each="doctor : ${doctors}">
+    <a th:href="@{/admin/doctors/{id}(id=${doctor.getId()})}"
+       th:text="${doctor.getName() + '   ' + doctor.getSurname()}">user</a>
+    <br/>
+</div>
+</body>
+</html>

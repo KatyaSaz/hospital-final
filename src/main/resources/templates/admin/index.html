@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+
+</head>
+<body>
+<h2>Administrator main page</h2>
+<div class="container">
+    <form action="/auth/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+<div id="menu">
+    <ul>
+        <li><a th:href="@{/admin/patients}">Show all patients</a></li>
+        <li><a th:href="@{/admin/doctors}">Show all doctors</a></li>
+        <li><a th:href="@{/admin/patient/new}">Add new patient</a></li>
+        <li><a th:href="@{/admin/doctor/new}">Add new doctor</a></li>
+    </ul>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Card</title>
+</head>
+<body>
+<h2>Create new card record</h2>
+<!--<input type="hidden" name="id" value="${id}"/>-->
+
+<form th:method="POST" th:action="@{/doctor/patients/{id}/record(id=${ID})}" th:object="${record}">
+    <label th:text="${'Doctor name:    ' + record.getDoctorName()}" >VALUE</label>
+    <input type="hidden" th:field="*{doctorName}"/>
+    <br/>
+    <label for="date">Enter Date: </label>
+    <input type="text" th:field="*{date}" id="date"/>
+    <br/>
+    <label for="description">Enter description: </label>
+    <textarea th:field="*{description}" id="description"/>
+    <br/>
+    <label for="type">Record type: </label>
+    <select th:field="*{recordType}" id="type">
+        <option value="Direction">Direction</option>
+        <option value="Execution">Execution</option>
+        <option value="Diagnosis">Diagnosis</option>
+    </select>
+    <br/>
+    <input type="submit" value="Add record"/>
+    <br/>
+</form>
+
+</body>
+

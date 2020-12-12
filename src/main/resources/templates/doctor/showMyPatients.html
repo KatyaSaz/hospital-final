@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Patients</title>
+</head>
+<body>
+<h2>My patients</h2>
+
+<h3>Sort by: </h3>
+<ul>
+
+    <li><a th:href="@{/doctor/patients}">Name</a></li>
+    <li><a th:href="@{/doctor/patients}">Age</a></li>
+</ul>
+
+<br/>
+<hr/>
+<!--<p th:if="${doctor.getPatients().size() == 0}?">This doctor don't have patient yet</p>-->
+<div th:each="patient : ${patients}">
+    <a th:href="@{/doctor/patients/{id}(id=${patient.getId()})}"
+       th:text="${patient.getName() + '   ' + patient.getSurname()}">user</a>
+    <br/>
+</div>
+</body>
+</html>
