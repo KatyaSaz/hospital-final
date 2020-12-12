@@ -18,6 +18,8 @@ target/
 .mvn
 target/
 src/test/
+mvnw
+*.cmd
 *.iws
 *.iml
 *.ipr
