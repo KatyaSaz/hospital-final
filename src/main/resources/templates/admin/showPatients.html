@@ -15,6 +15,9 @@
 <div th:each="patient : ${patients}">
     <a th:href="@{/admin/patients/{id}(id=${patient.getId()})}"
        th:text="${patient.getName() + '   ' + patient.getSurname()}">user</a>
+    <form th:method="POST" th:action="@{/admin/delete/patient/{id}(id=${patient.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
     <br/>
 </div>
 </body>

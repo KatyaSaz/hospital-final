@@ -47,13 +47,6 @@ public class DoctorController {
         return "doctor/index";
     }
 
-//
-//    @GetMapping("/info")
-//    public String myProfile(Model model){
-//        model.addAttribute("doctor", currentDoc);
-//        return "doctor/infoAbout";
-//    }
-
     @GetMapping("/patients")
     public String showAllMyPatients(Model model){
         model.addAttribute("patients", currentDoc.getPatients());
@@ -76,30 +69,8 @@ public class DoctorController {
     @PostMapping("/patients/{id}/record")
     public String createDoctor(@PathVariable("id") Long id,
                                @ModelAttribute("record")  CardRecord cardRecord) {
-
-        Patient getPat = patientService.getById(id);
-        if(getPat!=null){
-            cardRecord.setPatient(getPat);
-            cardRecordService.save(cardRecord);
-//            List<CardRecord> cr = getPat.getRecords();
-//            cr.add(cardRecord);
-        }else{
-            System.out.println(id);
-        }
+        cardRecord.setPatient(patientService.getById(id));
+        cardRecordService.save(cardRecord);
         return "redirect:/doctor/patients/"+id;
     }
-
-//
-//    @RequestMapping("/patients/{id}/write")
-//    public String showFormForWrite(@PathVariable("id") int id, Model model){
-//        model.addAttribute("patient", doctorDAO.showPat(currentDoc, id));
-//        model.addAttribute("patients", currentDoc.getPatients());
-//        return "doctor/showMyPatients";
-//    }
-
-//    @PostMapping()
-//    public String createDoctor(@ModelAttribute("")  ) {
-//        doctorDAO.save(doctor);
-//        return "redirect:/admin/doctors";
-//    }
 }

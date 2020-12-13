@@ -1,57 +1,67 @@
-//package ua.sazonova.hospital.controllers;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.*;
-//import ua.sazonova.hospital.dao.DoctorDAO;
-//import ua.sazonova.hospital.dao.PatientDAO;
-//
-//@Controller
-//@RequestMapping("/admin")
-//public class AdminController {
-//
-//    private PatientDAO patientDAO;
-//    private DoctorDAO doctorDAO;
-//
-//    @Autowired
-//    public AdminController(PatientDAO patientDAO, DoctorDAO doctorDAO) {
-//        this.patientDAO = patientDAO;
-//        this.doctorDAO = doctorDAO;
-//    }
-//
-//    @GetMapping()
-//   // @PreAuthorize("hasAuthority('admin:read')")
-//    public String startPage(){
-//        return "admin/index";
-//    }
-//
-//    @GetMapping("/doctors")
-//    public String getAllDoctors(Model model){
-//        model.addAttribute("doctors", doctorDAO.index());
-//        return "admin/showDoctors";
-//    }
-//
-//    @RequestMapping("/doctors/{id}")
-//    public String getDoctorById(@PathVariable("id") int id, Model model){
-//        model.addAttribute("doctor", doctorDAO.show(id));
-//        return "admin/oneDoctor";
-//    }
-//
-//    @GetMapping("/patients")
-//    public String getAllPatients(Model model){
-//        model.addAttribute("patients", patientDAO.index());
-//        return "admin/showPatients";
-//    }
-//
-//    @RequestMapping("/patients/{id}")
-//    public String getPatientById(@PathVariable("id") int id, Model model){
-//        model.addAttribute("patient", patientDAO.show(id));
-//        return "admin/onePatient";
-//    }
-//
+package ua.sazonova.hospital.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import ua.sazonova.hospital.service.DoctorService;
+import ua.sazonova.hospital.service.PatientService;
+
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+    private DoctorService doctorService;
+    private PatientService patientService;
+
+    @Autowired
+    public AdminController(DoctorService doctorService, PatientService patientService) {
+        this.doctorService = doctorService;
+        this.patientService = patientService;
+    }
+
+    @GetMapping()
+   // @PreAuthorize("hasAuthority('admin:read')")
+    public String startPage(){
+        return "admin/index";
+    }
+
+    @GetMapping("/doctors")
+    public String getAllDoctors(Model model){
+        model.addAttribute("doctors", doctorService.getAllDoctors());
+        return "admin/showDoctors";
+    }
+
+    @RequestMapping("/doctors/{id}")
+    public String getDoctorById(@PathVariable("id") Long id, Model model){
+        model.addAttribute("doctor", doctorService.getById(id));
+        return "admin/oneDoctor";
+    }
+
+    @PostMapping("/delete/doctor/{id}")
+    public String deleteDoctor(@PathVariable("id") Long id){
+        doctorService.delete(doctorService.getById(id));
+        return "redirect:/admin/doctors";
+    }
+
+    @GetMapping("/patients")
+    public String getAllPatients(Model model){
+        model.addAttribute("patients", patientService.getAllPatients());
+        return "admin/showPatients";
+    }
+
+    @RequestMapping("/patients/{id}")
+    public String getPatientById(@PathVariable("id") Long id, Model model){
+        model.addAttribute("patient", patientService.getById(id));
+        return "admin/onePatient";
+    }
+
+    @PostMapping("/delete/patient/{id}")
+    public String deletePatient(@PathVariable("id") Long id){
+        patientService.delete(patientService.getById(id));
+        return "redirect:/admin/patients";
+    }
+
 //    @GetMapping("/patient/new")
 //    public String newPatient(@ModelAttribute("patient") Patient patient){
 //        return "admin/newPatient";
@@ -84,13 +94,6 @@
 //        return "admin/patients";
 //    }
 //
-//    @DeleteMapping("/doctors/{id}")
-//    public String deleteDoctor(@PathVariable("id") int id){
-//
-//        System.out.println("in delete doctor");
-//        System.out.println(doctorDAO.show(id).getName());
-//        doctorDAO.delete(id);
-//        return "admin/index";
-//    }
-//
-//}
+
+
+}

@@ -27,13 +27,13 @@ public class CardRecordService {
         cardRecordRepository.save(cardRecord);
     }
 
-    public void delete(CardRecord cardRecord){
-        cardRecordRepository.delete(cardRecord);
-    }
-
-    public List<CardRecord> getAllRecords(){
-        return cardRecordRepository.findAll();
-    }
+//    public void delete(CardRecord cardRecord){
+//        cardRecordRepository.delete(cardRecord);
+//    }
+//
+//    public List<CardRecord> getAllRecords(){
+//        return cardRecordRepository.findAll();
+//    }
 
 
 

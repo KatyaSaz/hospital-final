@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <title>Doctors List</title>
 </head>
+
+<style>
+    ul.hr {
+        margin: 0; /* Обнуляем значение отступов */
+        padding: 4px; /* Значение полей */
+    }
+
+    ul.hr li {
+        display: inline; /* Отображать как строчный элемент */
+        margin-right: 10px; /* Отступ слева */
+        /*border: 1px solid #000; !* Рамка вокруг текста *!*/
+        padding: 3px; /* Поля вокруг текста */
+    }
+
+</style>
 <body>
 <h2>All Doctors List</h2>
 <h3>Sort by: </h3>
-<!--th:field="*{sort}"-->
-<input type="radio"  id="name" value="female"/>Name
-<input type="radio"  id="amount" value="male"/>Amount of Patients
-<br/>
-<label for="type">By type: </label>
-<select id="type">
-    <option value="-"></option>
-    <option value="dermatologist">dermatologist</option>
-    <option value="pediatrician">pediatrician</option>
-    <option value="surgeon">surgeon</option>
-    <option value="optometrist">optometrist</option>
-</select>
-<br/>
-<input type="submit" value="Sort"/>
+<div class="menu">
+    <!--th:field="*{sort}"-->
+    <input type="radio" id="name" value="female"/>Name
+    <input type="radio" id="amount" value="male"/>Amount of Patients
+    <br/>
+    <label for="type">By type: </label>
+    <select id="type">
+        <option value="-"></option>
+        <option value="dermatologist">dermatologist</option>
+        <option value="pediatrician">pediatrician</option>
+        <option value="surgeon">surgeon</option>
+        <option value="optometrist">optometrist</option>
+    </select>
+    <br/>
+    <input type="submit" value="Sort"/>
+</div>
 
 <!--<ul>-->
 <!--    -->
@@ -32,7 +49,22 @@
 <div th:each="doctor : ${doctors}">
     <a th:href="@{/admin/doctors/{id}(id=${doctor.getId()})}"
        th:text="${doctor.getName() + '   ' + doctor.getSurname()}">user</a>
+    <form th:method="POST" th:action="@{/admin/delete/doctor/{id}(id=${doctor.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+<!--    <ul class="hr">-->
+<!--        <li></li>-->
+<!--        <li><input type="submit" value="Edit"/></li>-->
+<!--        <form th:method="DELETE" th:action="@{/admin/doctors/{id}(id=${doctor.getId()})}" >-->
+<!--            &lt;!&ndash;            <form method="post" th:action="@{/admin/delete/{id}(id=${doctor.getId()})}">&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="hidden" value="${doctor}">&ndash;&gt;-->
+<!--            <input type="submit" value="Delete"/>-->
+<!--        </form>-->
+
+        <!--        <input type="submit" value="Remove"/></li>-->
+<!--    </ul>-->
     <br/>
 </div>
+
 </body>
 </html>

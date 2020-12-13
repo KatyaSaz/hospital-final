@@ -5,25 +5,14 @@
     <title>Doctor</title>
 </head>
 <body>
-<p th:text="${'Doctor ID: ' + doctor.getId()}">VALUE</p>
-<!--<p th:text="${'Login:      ' + patient.getLogin()}">VALUE</p>-->
-<!--<p th:text="${'Password:   ' + patient.getPassword()}">VALUE</p>-->
-<p th:text="${'Name:       ' + doctor.getName()}">VALUE</p>
-<p th:text="${'Surname:    ' + doctor.getSurname()}">VALUE</p>
-<p th:text="${'DoctorType: ' + doctor.getDoctorType()}">VALUE</p>
+<p th:text="${'Name:       ' + doctor.getName()+' '+doctor.getSurname()}">VALUE</p>
+<p th:text="${'Doctor type: ' + doctor.getType()}">VALUE</p>
 <p th:text="${'Experience:   ' + doctor.getExperience() + '  years'}">VALUE</p>
-
-<form th:method="DELETE" th:action="@{/admin/doctors/{id}(id=${doctor.getId()})}">
-    <input type="submit" value="Delete"/>
-</form>
 <br/>
 <p>---> His patients <---</p>
-<!--<p th:if="${doctor.getPatients().size() == 0}?">This doctor don't have patient yet</p>-->
 <div th:each="patient : ${doctor.getPatients()}">
     <p th:text="${patient.getName() + '   ' + patient.getSurname()}">user</p>
-<!--    <br/>-->
-<!--   -->
-<!--    <input th:if="${record.getRecordType().name() == 'Diagnosis'}" type="submit" value="SAVE"/>-->
+
 </div>
 
 

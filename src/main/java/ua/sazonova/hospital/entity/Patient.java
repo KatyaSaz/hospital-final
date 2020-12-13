@@ -30,10 +30,10 @@ public class Patient{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "doc_id", nullable=false)
     private Doctor doctor;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "patient")
     private List<CardRecord> records;
 
 
