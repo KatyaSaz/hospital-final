@@ -16,7 +16,6 @@
 
 <br/>
 <hr/>
-<!--<p th:if="${doctor.getPatients().size() == 0}?">This doctor don't have patient yet</p>-->
 <div th:each="patient : ${patients}">
     <a th:href="@{/doctor/patients/{id}(id=${patient.getId()})}"
        th:text="${patient.getName() + '   ' + patient.getSurname()}">user</a>

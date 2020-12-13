@@ -9,11 +9,6 @@
 <!--<input type="hidden" name="id" value="${id}"/>-->
 
 <form th:method="POST" th:action="@{/doctor/patients/{id}/record(id=${ID})}" th:object="${record}">
-    <label th:text="${'Doctor name:    ' + record.getDoctorName()}" >VALUE</label>
-    <input type="hidden" th:field="*{doctorName}"/>
-    <br/>
-    <label for="date">Enter Date: </label>
-    <input type="text" th:field="*{date}" id="date"/>
     <br/>
     <label for="description">Enter description: </label>
     <textarea th:field="*{description}" id="description"/>

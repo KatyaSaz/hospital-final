@@ -1,9 +1,6 @@
 package ua.sazonova.hospital.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import ua.sazonova.hospital.entity.enam.Gender;
 
@@ -16,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@EqualsAndHashCode
 @Table(name = "patients")
 public class Patient{
     @Id
@@ -25,12 +23,12 @@ public class Patient{
     private String surname;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name="year")
     private int year;
     private String phone;
-    @ManyToOne
-    @JoinColumn(name="doc_id", nullable=false)
+    //@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "doc_id", nullable=false)
     private Doctor doctor;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

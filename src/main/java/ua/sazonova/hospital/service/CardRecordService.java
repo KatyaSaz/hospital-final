@@ -35,16 +35,7 @@ public class CardRecordService {
         return cardRecordRepository.findAll();
     }
 
-    public List<CardRecord> getRecordsOfOnePatient(Long id){
-        List<CardRecord> allRec = getAllRecords();
-        List<CardRecord> result = new ArrayList<>();
-        for(CardRecord cr:allRec){
-            if(cr.getPatient().getId().equals(id)){
-                result.add(cr);
-            }
-        }
-        return result;
-    }
+
 
 
 

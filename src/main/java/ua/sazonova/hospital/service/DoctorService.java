@@ -7,6 +7,7 @@ import ua.sazonova.hospital.entity.Patient;
 import ua.sazonova.hospital.repository.DoctorRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DoctorService {

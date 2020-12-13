@@ -5,6 +5,7 @@ import ua.sazonova.hospital.entity.enam.DoctorType;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +22,8 @@ public class Doctor {
     @Enumerated(EnumType.STRING)
     private DoctorType type;
     private int experience;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Patient> patients;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
