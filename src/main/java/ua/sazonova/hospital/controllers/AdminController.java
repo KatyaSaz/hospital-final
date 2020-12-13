@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.sazonova.hospital.entity.Doctor;
+import ua.sazonova.hospital.entity.Patient;
 import ua.sazonova.hospital.service.DoctorService;
 import ua.sazonova.hospital.service.PatientService;
 
@@ -47,6 +49,8 @@ public class AdminController {
     @GetMapping("/patients")
     public String getAllPatients(Model model){
         model.addAttribute("patients", patientService.getAllPatients());
+        model.addAttribute("doctors", doctorService.getAllDoctors());
+        model.addAttribute("newDoctor", new Doctor());
         return "admin/showPatients";
     }
 
@@ -61,6 +65,29 @@ public class AdminController {
         patientService.delete(patientService.getById(id));
         return "redirect:/admin/patients";
     }
+
+//    @PostMapping("/appoint/{id}")
+//    public String appoint(@PathVariable("id") Long id,
+//                          @ModelAttribute("newDoctor") Doctor doctor){
+//        System.out.println(doctor.getName());
+//       // patientService.getById(id).setDoctor(doctor);
+//        return "redirect:/admin/patients";
+//    }
+
+    @PostMapping("/appoint/{id}")
+    public String appointDoctorToUser (@PathVariable("id") Long id,
+                                       @RequestParam Long docId) {
+        if(docId!=0){
+            Patient pat = patientService.getById(id);
+            if(!pat.getDoctor().getId().equals(docId)){
+                pat.setDoctor(doctorService.getById(docId));
+                patientService.save(pat);
+            }
+        }
+        System.out.println(docId);
+        return "redirect:/admin/patients";
+    }
+
 
 //    @GetMapping("/patient/new")
 //    public String newPatient(@ModelAttribute("patient") Patient patient){

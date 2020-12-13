@@ -9,7 +9,11 @@
 <p th:text="${'Gender:     ' + patient.getGender()}">VALUE</p>
 <p th:text="${'Birth year: ' + patient.getYear()}">VALUE</p>
 <p th:text="${'Phone:      ' + patient.getPhone()}">VALUE</p>
-<p th:text="${'Doctor:     ' + patient.getDoctor().getName()+' '+patient.getDoctor().getSurname()}">VALUE</p>
+<p th:text="${'Doctor:     ' + (
+(patient.getDoctor() == null) ?
+'-' :
+(patient.getDoctor().getName()+' '+patient.getDoctor().getSurname())
+)}">VALUE</p>
 <br/>
 <a th:href="@{/doctor/patients/{id}/write(id=${patient.getId()})}">Add an entry to the card</a>
 <br/>

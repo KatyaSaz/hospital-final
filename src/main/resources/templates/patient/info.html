@@ -14,7 +14,12 @@
 <p th:text="${'Gender:     ' + patient.getGender()}">VALUE</p>
 <p th:text="${'Birth year: ' + patient.getYear()}">VALUE</p>
 <p th:text="${'Phone:      ' + patient.getPhone()}">VALUE</p>
-<p th:text="${'Doctor:     ' + patient.getDoctor().getName()+' '+patient.getDoctor().getSurname()}">VALUE</p>
+<p th:text="${'Doctor:     ' + (
+(patient.getDoctor() == null) ?
+'-' :
+(patient.getDoctor().getName()+' '+patient.getDoctor().getSurname())
+)}">VALUE</p>
+
 <br/>
 <p>---> RECORDS IN CARD <---</p>
 <p th:if="${patient.getRecords().size() == 0}">There is no records in the card yet</p>

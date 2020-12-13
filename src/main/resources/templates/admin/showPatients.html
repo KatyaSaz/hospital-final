@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <title>Patients</title>
 </head>
 <body>
@@ -13,10 +13,27 @@
 </ul>
 
 <div th:each="patient : ${patients}">
+    <hr/>
     <a th:href="@{/admin/patients/{id}(id=${patient.getId()})}"
        th:text="${patient.getName() + '   ' + patient.getSurname()}">user</a>
+
+    <form th:method="POST" th:action="@{/admin/appoint/{id}(id=${patient.getId()})}">
+        <select class="form-control" id="docId" name="docId">
+            <option value="0"
+                    th:text="${(patient.getDoctor() == null) ?
+                    'Select doctor' :
+                    (patient.getDoctor().getName() + ' (' + patient.getDoctor().getType()+')')
+                    }">Select doctor</option>
+            <option th:each="doctor : ${doctors}"
+                    th:value="${doctor.getId()}"
+                    th:text="${doctor.getName()+ ' (' + doctor.getType()+')'}">
+            </option>
+        </select>
+        <button type="submit">Appoint</button>
+    </form>
+
     <form th:method="POST" th:action="@{/admin/delete/patient/{id}(id=${patient.getId()})}">
-        <input type="submit" value="Delete"/>
+        <input type="submit" value="Delete patient"/>
     </form>
     <br/>
 </div>

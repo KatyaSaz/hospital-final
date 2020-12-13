@@ -28,6 +28,11 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
+//    public void update(Patient updatedPatient){
+//        Patient needUpdatePat = patientRepository.getOne(updatedPatient.getId());
+//        patientRepository.save()
+//    }
+
     public void delete(Patient patient){
         patientRepository.delete(patient);
     }
