@@ -5,6 +5,19 @@
     <title>Patient</title>
 </head>
 <p>
+<div class="topMenu">
+    <div class="logOut" style="float:left;">
+        <form action="/auth/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="goBack" style="float:left;">
+        <form action="/doctor" method="GET">
+            <button type="submit">Back to main page</button>
+        </form>
+    </div>
+</div>
+<br/>
 <p th:text="${'Name:       ' + patient.getName()+' '+patient.getSurname()}">VALUE</p>
 <p th:text="${'Gender:     ' + patient.getGender()}">VALUE</p>
 <p th:text="${'Birth year: ' + patient.getYear()}">VALUE</p>

@@ -1,6 +1,7 @@
 package ua.sazonova.hospital.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.sazonova.hospital.entity.CardRecord;
 import ua.sazonova.hospital.entity.Doctor;
@@ -9,6 +10,7 @@ import ua.sazonova.hospital.repository.DoctorRepository;
 import ua.sazonova.hospital.repository.PatientRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,11 +30,6 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
-//    public void update(Patient updatedPatient){
-//        Patient needUpdatePat = patientRepository.getOne(updatedPatient.getId());
-//        patientRepository.save()
-//    }
-
     public void delete(Patient patient){
         patientRepository.delete(patient);
     }
@@ -48,7 +45,28 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-//    public List<Patient> getPatientsOfOneDoctor(Long id){
+    public List<Patient> sortedList(String field, String direction){
+        Sort sort = direction.equals(Sort.Direction.ASC.name())?
+                Sort.by(field).ascending():
+                Sort.by(field).descending();
+        return patientRepository.findAll(sort);
+    }
+
+//    public Page<Book> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection){
+//        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField) :
+//                Sort.by(sortField).descending();
+//        Pageable pageable = PageRequest.of(pageNo -1, pageSize, sort);
+//        return this.bookRepository.findAll(pageable);
+//    }
+
+    public List<Patient> getSortedPatientsOfOneDoctor(Long docId, String field, String direction){
+
+        List<Patient> patients = patientRepository.getPatientsByDoctorEquals(docId);
+//        Sort sort = direction.equals(Sort.Direction.ASC.name())?
+//                Sort.by(field).ascending():
+//                Sort.by(field).descending();
+//        Collections.sort(patients, sort);
+
 //        List<Patient> allPat = getAllPatients();
 //        List<Patient> res = new ArrayList<>();
 //        for(Patient p:res){
@@ -56,8 +74,8 @@ public class PatientService {
 //                res.add(p);
 //            }
 //        }
-//        return res;
-//    }
+        return patients;
+    }
 
 //
 //

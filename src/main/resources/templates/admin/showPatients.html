@@ -5,14 +5,37 @@
     <title>Patients</title>
 </head>
 <body>
-<h2>All Patients List</h2>
-<h3>Sort by: </h3>
-<ul>
-    <li><a th:href="@{/doctor/patients}">Name</a></li>
-    <li><a th:href="@{/doctor/patients}">Year</a></li>
-</ul>
+<div class="topMenu">
+    <div class="logOut" style="float:left;">
+        <form action="/auth/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="goBack" style="float:left;">
+        <form action="/admin" method="GET">
+            <button type="submit">Back to main page</button>
+        </form>
+    </div>
+</div>
+<br/>
 
-<div th:each="patient : ${patients}">
+<h3>Full list of patients </h3>
+
+<form th:method="POST" th:action="@{/admin/patients/sort}">
+    <select id="field" name="field">
+        <option value=""></option>
+        <option value="name" >name</option>
+        <option value="year">year</option>
+    </select>
+    <select id="direction" name="direction">
+        <option value=""></option>
+        <option value="ASC">ascending</option>
+        <option value="DESC" >descending</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+
+<div class="patient"  th:each="patient : ${patients}">
     <hr/>
     <a th:href="@{/admin/patients/{id}(id=${patient.getId()})}"
        th:text="${patient.getName() + '   ' + patient.getSurname()}">user</a>
@@ -20,13 +43,13 @@
     <form th:method="POST" th:action="@{/admin/appoint/{id}(id=${patient.getId()})}">
         <select class="form-control" id="docId" name="docId">
             <option value="0"
-                    th:text="${(patient.getDoctor() == null) ?
-                    'Select doctor' :
-                    (patient.getDoctor().getName() + ' (' + patient.getDoctor().getType()+')')
-                    }">Select doctor</option>
+                    th:if="${patient.getDoctor() == null}">
+                Select doctor
+            </option>
             <option th:each="doctor : ${doctors}"
                     th:value="${doctor.getId()}"
-                    th:text="${doctor.getName()+ ' (' + doctor.getType()+')'}">
+                    th:text="${doctor.getName()+ ' (' + doctor.getType()+')'}"
+            th:selected="${doctor.getId().equals(patient.getDoctor().getId())}">
             </option>
         </select>
         <button type="submit">Appoint</button>

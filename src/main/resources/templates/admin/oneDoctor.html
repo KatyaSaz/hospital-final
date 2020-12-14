@@ -5,6 +5,19 @@
     <title>Doctor</title>
 </head>
 <body>
+<div class="topMenu">
+    <div class="logOut" style="float:left;">
+        <form action="/auth/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="goBack" style="float:left;">
+        <form action="/admin" method="GET">
+            <button type="submit">Back to main page</button>
+        </form>
+    </div>
+</div>
+<br/>
 <p th:text="${'Name:       ' + doctor.getName()+' '+doctor.getSurname()}">VALUE</p>
 <p th:text="${'Doctor type: ' + doctor.getType()}">VALUE</p>
 <p th:text="${'Experience:   ' + doctor.getExperience() + '  years'}">VALUE</p>

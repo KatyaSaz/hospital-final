@@ -5,14 +5,34 @@
     <title>Patients</title>
 </head>
 <body>
-<h2>My patients</h2>
+<div class="topMenu">
+    <div class="logOut" style="float:left;">
+        <form action="/auth/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="goBack" style="float:left;">
+        <form action="/doctor" method="GET">
+            <button type="submit">Back to main page</button>
+        </form>
+    </div>
+</div>
+<br/>
+<h3>My patients</h3>
 
-<h3>Sort by: </h3>
-<ul>
-
-    <li><a th:href="@{/doctor/patients}">Name</a></li>
-    <li><a th:href="@{/doctor/patients}">Age</a></li>
-</ul>
+<form th:method="POST" th:action="@{/doctor/patients/sort}">
+    <select id="field" name="field">
+        <option value=""></option>
+        <option value="name" >name</option>
+        <option value="year">year</option>
+    </select>
+    <select id="direction" name="direction">
+        <option value=""></option>
+        <option value="ASC">ascending</option>
+        <option value="DESC" >descending</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
 
 <br/>
 <hr/>

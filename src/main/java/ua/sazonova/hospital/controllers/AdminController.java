@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.sazonova.hospital.entity.Doctor;
 import ua.sazonova.hospital.entity.Patient;
+import ua.sazonova.hospital.entity.enam.DoctorType;
 import ua.sazonova.hospital.service.DoctorService;
 import ua.sazonova.hospital.service.PatientService;
 
@@ -46,11 +47,33 @@ public class AdminController {
         return "redirect:/admin/doctors";
     }
 
+    @PostMapping("/doctors/sort")
+    public String sortDoctors (@RequestParam String field,
+                               @RequestParam String direction,
+                               Model model) {
+        if (field.equals("") && direction.equals("")) {
+            return "redirect:/admin/doctors";
+        }else{
+            model.addAttribute("doctors", doctorService.sortedList(field, direction));
+            return "admin/showDoctors";
+        }
+    }
+
+    @PostMapping("/doctors/search")
+    public String sortDoctors (@RequestParam DoctorType type,
+                               Model model) {
+        if (type.equals("")) {
+            return "redirect:/admin/doctors";
+        }else{
+            model.addAttribute("doctors", doctorService.getByOneType(type));
+            return "admin/showDoctors";
+        }
+    }
+
     @GetMapping("/patients")
     public String getAllPatients(Model model){
         model.addAttribute("patients", patientService.getAllPatients());
         model.addAttribute("doctors", doctorService.getAllDoctors());
-        model.addAttribute("newDoctor", new Doctor());
         return "admin/showPatients";
     }
 
@@ -66,13 +89,18 @@ public class AdminController {
         return "redirect:/admin/patients";
     }
 
-//    @PostMapping("/appoint/{id}")
-//    public String appoint(@PathVariable("id") Long id,
-//                          @ModelAttribute("newDoctor") Doctor doctor){
-//        System.out.println(doctor.getName());
-//       // patientService.getById(id).setDoctor(doctor);
-//        return "redirect:/admin/patients";
-//    }
+    @PostMapping("/patients/sort")
+    public String sortPatients (@RequestParam String field,
+                              @RequestParam String direction,
+                              Model model) {
+        if (field.equals("") && direction.equals("")) {
+            return "redirect:/admin/patients";
+        }else{
+            model.addAttribute("patients", patientService.sortedList(field, direction));
+            model.addAttribute("doctors", doctorService.getAllDoctors());
+            return "admin/showPatients";
+        }
+    }
 
     @PostMapping("/appoint/{id}")
     public String appointDoctorToUser (@PathVariable("id") Long id,
@@ -87,6 +115,8 @@ public class AdminController {
         System.out.println(docId);
         return "redirect:/admin/patients";
     }
+
+
 
 
 //    @GetMapping("/patient/new")

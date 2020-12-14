@@ -30,11 +30,10 @@ public class DoctorController {
         this.patientService = patientService;
         this.cardRecordService = cardRecordService;
     }
-
-    //    @GetMapping()
-//    public String showStartPage(){
-//        return "doctor/index";
-//    }
+    @GetMapping
+    public String main(){
+        return "redirect:/doctor/"+currentDoc.getId();
+    }
 
     @GetMapping("/{id}")
     public String startPage(@PathVariable("id") Long id,
@@ -50,6 +49,7 @@ public class DoctorController {
     @GetMapping("/patients")
     public String showAllMyPatients(Model model){
         model.addAttribute("patients", currentDoc.getPatients());
+        model.addAttribute("doctor", currentDoc);
         return "doctor/showMyPatients";
     }
 
@@ -73,4 +73,22 @@ public class DoctorController {
         cardRecordService.save(cardRecord);
         return "redirect:/doctor/patients/"+id;
     }
+
+//    @PostMapping("/patients/sort")
+//    public String sortPatients (@RequestParam String field,
+//                                @RequestParam String direction,
+//                                Model model) {
+//        if (field.equals("") && direction.equals("")) {
+//            return "redirect:/doctor/patients";
+//        }else{
+//            System.out.println(field);
+//            System.out.println(direction);
+//            for(Patient pat:patientService.getSortedPatientsOfOneDoctor(currentDoc.getId(),
+//                    field, direction)){
+//                System.out.println(pat.getName()+"  "+pat.getDoctor());
+//            }
+//           // model.addAttribute("patients", patientService.sortedList(field, direction));
+//            return "doctor/showMyPatients";
+//        }
+//    }
 }

@@ -6,7 +6,6 @@
 </head>
 <body>
 <h2>Create new card record</h2>
-<!--<input type="hidden" name="id" value="${id}"/>-->
 
 <form th:method="POST" th:action="@{/doctor/patients/{id}/record(id=${ID})}" th:object="${record}">
     <br/>
