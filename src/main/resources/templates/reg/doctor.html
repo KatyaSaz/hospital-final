@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Doctor</title>
+</head>
+<form th:method="POST" th:action="@{/registration/doctor}" th:object="${doctor}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <label for="surname">Enter surname: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <br/>
+
+    <label for="type">Choose type: </label>
+    <select th:field="*{type}" id="type">
+        <option value="dermatologist">dermatologist</option>
+        <option value="pediatrician">pediatrician</option>
+        <option value="surgeon">surgeon</option>
+        <option value="optometrist">optometrist</option>
+    </select>
+    <br/>
+    <label for="experience">Enter experience (in years): </label>
+    <input type="text" th:field="*{experience}" id="experience"/>
+    <br/>
+    <input type="submit" value="Register"/>
+    <br/>
+</form>
+</body>
+</html>

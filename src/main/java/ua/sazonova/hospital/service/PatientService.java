@@ -30,6 +30,11 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
+    public void create(Patient patient){
+        save(patient);
+        find(patient).getUser().setIdMoreInfo(patient.getId());
+    }
+
     public void delete(Patient patient){
         patientRepository.delete(patient);
     }

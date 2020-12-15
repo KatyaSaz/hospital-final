@@ -28,6 +28,11 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
 
+    public void create(Doctor doctor){
+        save(doctor);
+        find(doctor).getUser().setIdMoreInfo(doctor.getId());
+    }
+
     public void delete(Doctor doctor) {
         doctorRepository.delete(doctor);
     }

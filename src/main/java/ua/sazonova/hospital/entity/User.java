@@ -24,8 +24,11 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    private boolean isActive;
     @Column(name= "more_info_id")
-    private int idMoreInfo;
+    private Long idMoreInfo;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -54,6 +57,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive;
     }
 }
