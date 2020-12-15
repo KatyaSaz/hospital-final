@@ -15,7 +15,7 @@ import ua.sazonova.hospital.repository.UserRepository;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -39,16 +39,21 @@ public class AuthController {
 
         model.addAttribute("user", user);
 
+        System.out.println(user.getUsername()+" "+ user.getRole());
+
 
         if(user.getRole().equals(Role.DOCTOR)){
+            System.out.println("in doctor");
             return "redirect:/doctor/"+user.getIdMoreInfo();
         }else if(user.getRole().equals(Role.PATIENT)){
+            System.out.println("in patient");
             return "redirect:/patient/"+user.getIdMoreInfo();
         }else if(user.getRole().equals(Role.ADMIN)){
+            System.out.println("in admin");
             return "redirect:/admin";
         }
 
-        return "redirect:auth/login";
+        return "redirect:/login";
 
     }
 }

@@ -1,6 +1,7 @@
 package ua.sazonova.hospital.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,7 @@ public class AdminController {
         this.patientService = patientService;
     }
 
-    @GetMapping()
-   // @PreAuthorize("hasAuthority('admin:read')")
+    @GetMapping
     public String startPage(){
         return "admin/index";
     }
@@ -112,7 +112,6 @@ public class AdminController {
                 patientService.save(pat);
             }
         }
-        System.out.println(docId);
         return "redirect:/admin/patients";
     }
 
