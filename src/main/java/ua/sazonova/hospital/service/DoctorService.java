@@ -5,19 +5,28 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.sazonova.hospital.entity.Doctor;
 import ua.sazonova.hospital.entity.Patient;
+import ua.sazonova.hospital.entity.User;
 import ua.sazonova.hospital.entity.enam.DoctorType;
 import ua.sazonova.hospital.repository.DoctorRepository;
-
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class DoctorService {
 
     private DoctorRepository doctorRepository;
+    private UserService userService;
+
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Autowired
-    public DoctorService(DoctorRepository doctorRepository) {
+    public DoctorService(DoctorRepository doctorRepository, UserService userService) {
         this.doctorRepository = doctorRepository;
+        this.userService = userService;
     }
 
     public Doctor find(Doctor doctor) {
@@ -28,12 +37,19 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
 
+    @Transactional
     public void create(Doctor doctor){
+        userService.save(user);
+        doctor.setUser(user);
         save(doctor);
         find(doctor).getUser().setIdMoreInfo(doctor.getId());
     }
 
     public void delete(Doctor doctor) {
+        List<Patient> patients = doctor.getPatients();
+        for(Patient pat: patients){
+            pat.setDoctor(doctorRepository.getOne(Doctor.DEFAULT_DOCTOR_ID));
+        }
         doctorRepository.delete(doctor);
     }
 

@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 import ua.sazonova.hospital.entity.CardRecord;
 import ua.sazonova.hospital.entity.Doctor;
 import ua.sazonova.hospital.entity.Patient;
+import ua.sazonova.hospital.entity.User;
 import ua.sazonova.hospital.repository.DoctorRepository;
 import ua.sazonova.hospital.repository.PatientRepository;
+import ua.sazonova.hospital.repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,10 +19,17 @@ import java.util.List;
 @Service
 public class PatientService {
     private PatientRepository patientRepository;
+    private UserService userService;
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Autowired
-    public PatientService(PatientRepository patientRepository) {
+    public PatientService(PatientRepository patientRepository, UserService userService) {
         this.patientRepository = patientRepository;
+        this.userService = userService;
     }
 
     public Patient find(Patient patient){
@@ -30,7 +40,10 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
+    @Transactional
     public void create(Patient patient){
+        userService.save(user);
+        patient.setUser(user);
         save(patient);
         find(patient).getUser().setIdMoreInfo(patient.getId());
     }

@@ -3,6 +3,7 @@ package ua.sazonova.hospital.entity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ua.sazonova.hospital.entity.enam.Role;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.Collections;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+    private static int ENCODING_STRENGTH = 12;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,11 +26,10 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    private boolean isActive;
+    @Column(name= "is_active")
+    private Boolean isActive;
     @Column(name= "more_info_id")
     private Long idMoreInfo;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,6 +39,11 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    public void setPassword(String password) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder(ENCODING_STRENGTH);
+        this.password = bcrypt.encode(password);
     }
 
     @Override

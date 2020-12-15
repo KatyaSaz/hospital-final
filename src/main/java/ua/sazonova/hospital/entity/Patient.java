@@ -35,6 +35,4 @@ public class Patient{
     private User user;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "patient")
     private List<CardRecord> records;
-
-
 }

@@ -22,6 +22,9 @@ public class UserService implements UserDetailsService {
     }
 
     public void save(User user){
+        if(user.getIsActive()==null){
+            user.setIsActive(false);
+        }
         userRepository.save(user);
     }
 }

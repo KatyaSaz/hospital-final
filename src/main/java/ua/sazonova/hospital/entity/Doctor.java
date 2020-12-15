@@ -14,6 +14,8 @@ import java.util.Set;
 @Entity
 @Table(name = "doctors")
 public class Doctor {
+    public static final Long DEFAULT_DOCTOR_ID = 103L;
+
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
