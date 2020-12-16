@@ -2,27 +2,27 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New patient</title>
+    <title>[[#{reg.pat.title}]]</title>
 </head>
 <body>
 <form th:method="POST" th:action="@{/registration/patient}" th:object="${patient}">
-    <label for="name">Enter name: </label>
+    <label for="name">[[#{reg.name}]]</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
-    <label for="surname">Enter surname: </label>
+    <label for="surname">[[#{reg.surname}]]</label>
     <input type="text" th:field="*{surname}" id="surname"/>
     <br/>
-    <label>Gender:</label>
-    <input type="radio" th:field="*{gender}" id="male" value="male"/>Male
-    <input type="radio" th:field="*{gender}" id="female" value="female"/>Female
+    <label>[[#{reg.pat.gender}]]</label>
+    <input type="radio" th:field="*{gender}" id="male" value="male"/>[[#{reg.pat.gender.male}]]
+    <input type="radio" th:field="*{gender}" id="female" value="female"/>[[#{reg.pat.gender.female}]]
     <br/>
-    <label for="year">Enter birth year: </label>
+    <label for="year">[[#{reg.pat.year}]]</label>
     <input type="text" th:field="*{year}" id="year"/>
     <br/>
-    <label for="phone">Enter phone: </label>
+    <label for="phone">[[#{reg.pat.phone}]]</label>
     <input type="text" th:field="*{phone}" id="phone"/>
     <br/>
-    <input type="submit" value="Register"/>
+    <input type="submit" th:value="#{reg.register}"/>
     <br/>
 </form>
 </body>

@@ -1,22 +1,25 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>[[#{login}]]</title>
 </head>
 <body>
+
+<a href="/login?lang=EN">EN</a>
+<a href="/login?lang=RU">RU</a>
 <div class="container">
     <form class="form-signin" method="post" action="/login">
-        <h2 class="form-signin-heading">Login</h2>
+        <h2 class="form-signin-heading">[[#{authorisation}]]</h2>
         <p>
-            <label for="username">Username</label>
+            <label for="username" th:text="#{email}"></label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
         </p>
         <p>
-            <label for="password">Password</label>
+            <label for="password" th:text="#{password}"></label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
-        <a href="/registration">Registration</a>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a href="/registration" th:text="#{registr}" ></a>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{signin}"></button>
     </form>
 </div>
 </body>

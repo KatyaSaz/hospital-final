@@ -2,23 +2,23 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>[[#{reg.title}]]</title>
 </head>
 <body>
 <form th:method="POST" th:action="@{/registration}" th:object="${user}">
-    <label for="email">Enter email: </label>
+    <label for="email">[[#{reg.email}]]</label>
     <input type="text" th:field="*{email}" id="email"/>
     <br/>
-    <label for="password">Enter password: </label>
+    <label for="password">[[#{reg.password}]]</label>
     <input type="password" th:field="*{password}" id="password"/>
     <br/>
-    <label for="role">Choose role: </label>
+    <label for="role">[[#{reg.role}]]</label>
     <select th:field="*{role}" id="role">
-        <option value="PATIENT">patient</option>
-        <option value="DOCTOR">doctor</option>
+        <option value="PATIENT">[[#{reg.role.patient}]]</option>
+        <option value="DOCTOR">[[#{reg.role.doctor}]]</option>
     </select>
     <br/>
-    <input type="submit" value="Next"/>
+    <input type="submit" th:value="#{reg.next}"/>
     <br/>
 </form>
 </body>

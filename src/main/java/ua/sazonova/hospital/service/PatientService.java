@@ -3,7 +3,6 @@ package ua.sazonova.hospital.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ua.sazonova.hospital.entity.Doctor;
 import ua.sazonova.hospital.entity.Patient;
 import ua.sazonova.hospital.entity.User;
 import ua.sazonova.hospital.repository.PatientRepository;
