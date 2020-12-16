@@ -76,21 +76,22 @@ public class DoctorController {
         return "redirect:/doctor/patients/"+id;
     }
 
-//    @PostMapping("/patients/sort")
-//    public String sortPatients (@RequestParam String field,
-//                                @RequestParam String direction,
-//                                Model model) {
-//        if (field.equals("") && direction.equals("")) {
-//            return "redirect:/doctor/patients";
-//        }else{
-//            System.out.println(field);
-//            System.out.println(direction);
-//            for(Patient pat:patientService.getSortedPatientsOfOneDoctor(currentDoc.getId(),
-//                    field, direction)){
+    @PostMapping("/patients/sort")
+    public String sortPatients (@RequestParam String field,
+                                @RequestParam String direction,
+                                Model model) {
+        if (field.equals("") && direction.equals("")) {
+            return "redirect:/doctor/patients";
+        }else{
+            System.out.println(field);
+            System.out.println(direction);
+//            for(Patient pat:patientService.getSortedPatientsOfOneDoctor(
+//                    currentDoc.getId())){
 //                System.out.println(pat.getName()+"  "+pat.getDoctor());
 //            }
-//           // model.addAttribute("patients", patientService.sortedList(field, direction));
-//            return "doctor/showMyPatients";
-//        }
-//    }
+            model.addAttribute("patients", patientService.getSortedPatientsOfOneDoctor(
+                    currentDoc.getId(), field, direction));
+            return "doctor/showMyPatients";
+        }
+    }
 }

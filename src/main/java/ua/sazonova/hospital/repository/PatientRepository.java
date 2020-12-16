@@ -7,7 +7,10 @@ import ua.sazonova.hospital.entity.Patient;
 import java.util.List;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
-    List<Patient> getPatientsByDoctorEquals(Long id);
+    List<Patient> getAllByDoctor_IdEqualsOrderByNameAsc(Long docId);
+    List<Patient> getAllByDoctor_IdEqualsOrderByNameDesc(Long docId);
+    List<Patient> getAllByDoctor_IdEqualsOrderByYearAsc(Long docId);
+    List<Patient> getAllByDoctor_IdEqualsOrderByYearDesc(Long docId);
 
     List<Patient> findPatientsByUserIsActive(Boolean isActive);
 }
