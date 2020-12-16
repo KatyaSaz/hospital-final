@@ -36,12 +36,10 @@ public class RegistrationController {
     @PostMapping
     public String getUserInfo(@ModelAttribute("user") User user,
                               Model model){
-
         if(user.getRole().equals(Role.DOCTOR)){
             doctorService.setUser(user);
             model.addAttribute("doctor", new Doctor());
             return "reg/doctor";
-
         }else if(user.getRole().equals(Role.PATIENT)){
             patientService.setUser(user);
             model.addAttribute("patient", new Patient());

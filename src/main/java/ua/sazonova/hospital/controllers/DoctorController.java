@@ -13,11 +13,7 @@ import ua.sazonova.hospital.service.CardRecordService;
 import ua.sazonova.hospital.service.DoctorService;
 import ua.sazonova.hospital.service.PatientService;
 
-import java.util.List;
-
-
 @Controller
-//@PreAuthorize("hasAuthority('DOCTOR')")
 @RequestMapping("/doctor")
 public class DoctorController {
 
@@ -41,9 +37,6 @@ public class DoctorController {
     public String startPage(@PathVariable("id") Long id,
                             Model model){
         currentDoc = doctorService.getById(id);
-        for(Patient p:currentDoc.getPatients()){
-            System.out.println(p.getName()+" "+p.getId());
-        }
         model.addAttribute("doctor", currentDoc);
         return "doctor/index";
     }
@@ -83,13 +76,8 @@ public class DoctorController {
         if (field.equals("") && direction.equals("")) {
             return "redirect:/doctor/patients";
         }else{
-            System.out.println(field);
-            System.out.println(direction);
-//            for(Patient pat:patientService.getSortedPatientsOfOneDoctor(
-//                    currentDoc.getId())){
-//                System.out.println(pat.getName()+"  "+pat.getDoctor());
-//            }
-            model.addAttribute("patients", patientService.getSortedPatientsOfOneDoctor(
+            model.addAttribute("patients",
+                    patientService.getSortedPatientsOfOneDoctor(
                     currentDoc.getId(), field, direction));
             return "doctor/showMyPatients";
         }

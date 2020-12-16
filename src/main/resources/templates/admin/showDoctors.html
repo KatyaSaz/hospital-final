@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Doctors List</title>
 </head>
-
 <body>
 <div class="topMenu">
     <div class="logOut" style="float:left;">
@@ -46,12 +45,6 @@
     <button type="submit">Find</button>
 </form>
 
-<!--<ul>-->
-<!--    -->
-<!--    <li><a th:href="@{/admin/doctors}">Name</a></li>-->
-<!--    <li><a th:href="@{/admin/doctors}">Amount of patients</a></li>-->
-<!--    <label for="type">Choose type: </label>-->
-<!--</ul>-->
 <div th:each="doctor : ${doctors}">
     <hr/>
     <a th:href="@{/admin/doctors/{id}(id=${doctor.getId()})}"
@@ -59,17 +52,6 @@
     <form th:method="POST" th:action="@{/admin/delete/doctor/{id}(id=${doctor.getId()})}">
         <input type="submit" value="Delete"/>
     </form>
-<!--    <ul class="hr">-->
-<!--        <li></li>-->
-<!--        <li><input type="submit" value="Edit"/></li>-->
-<!--        <form th:method="DELETE" th:action="@{/admin/doctors/{id}(id=${doctor.getId()})}" >-->
-<!--            &lt;!&ndash;            <form method="post" th:action="@{/admin/delete/{id}(id=${doctor.getId()})}">&ndash;&gt;-->
-<!--&lt;!&ndash;            <input type="hidden" value="${doctor}">&ndash;&gt;-->
-<!--            <input type="submit" value="Delete"/>-->
-<!--        </form>-->
-
-        <!--        <input type="submit" value="Remove"/></li>-->
-<!--    </ul>-->
     <br/>
 </div>
 

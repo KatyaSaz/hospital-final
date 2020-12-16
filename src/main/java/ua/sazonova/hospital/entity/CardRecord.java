@@ -2,10 +2,7 @@ package ua.sazonova.hospital.entity;
 
 import lombok.*;
 import ua.sazonova.hospital.entity.enam.RecordType;
-
-
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor

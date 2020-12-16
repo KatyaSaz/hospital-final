@@ -40,13 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/default", true)
                 .and()
                 .logout()
-                //.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login");
     }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

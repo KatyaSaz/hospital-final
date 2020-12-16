@@ -16,12 +16,7 @@ public class DoctorService {
 
     private DoctorRepository doctorRepository;
     private UserService userService;
-
     private User user;
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     @Autowired
     public DoctorService(DoctorRepository doctorRepository, UserService userService) {
@@ -29,12 +24,8 @@ public class DoctorService {
         this.userService = userService;
     }
 
-    public Doctor find(Doctor doctor) {
-        return doctorRepository.getOne(doctor.getId());
-    }
-
-    public void save(Doctor doctor) {
-        doctorRepository.save(doctor);
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Transactional
@@ -45,6 +36,10 @@ public class DoctorService {
         find(doctor).getUser().setIdMoreInfo(doctor.getId());
     }
 
+    public void save(Doctor doctor) {
+        doctorRepository.save(doctor);
+    }
+
     public void delete(Doctor doctor) {
         List<Patient> patients = doctor.getPatients();
         for(Patient pat: patients){
@@ -53,8 +48,14 @@ public class DoctorService {
         doctorRepository.delete(doctor);
     }
 
-    public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
+    public void updateIsActive(Long id){
+        Doctor doctor = getById(id);
+        doctor.getUser().setIsActive(true);
+        save(doctor);
+    }
+
+    public Doctor find(Doctor doctor) {
+        return doctorRepository.getOne(doctor.getId());
     }
 
     public Doctor getById(Long id) {
@@ -64,49 +65,22 @@ public class DoctorService {
         return null;
     }
 
-    public List<Doctor> sortedList(String field, String direction) {
-        Sort sort = direction.equals(Sort.Direction.ASC.name()) ?
-                Sort.by(field).ascending():
-                Sort.by(field).descending();
-        return doctorRepository.findAll(sort);
-    }
-
-    public List<Doctor> getByOneType(DoctorType type){
-        return  doctorRepository.findByType(type);
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
     }
 
     public List<Doctor> getNonActive(){
         return doctorRepository.findDoctorsByUserIsActive(false);
     }
 
-    public void updateIsActive(Long id){
-        Doctor doctor = getById(id);
-        doctor.getUser().setIsActive(true);
-        save(doctor);
+    public List<Doctor> getByOneType(DoctorType type){
+        return  doctorRepository.findByType(type);
     }
 
-//    public List<Doctor> sortByAmountOfPatients(){
-//        List<Doctor> doctors = doctorRepository.findAll();
-//        List<Doctor> sortedDoctors = Collections.sort(
-//                doctors,
-//                ((Patient) d1,(Patient)d2)->d1.getPatients().size()-d2.getPatients().size()
-//        );
-//        Sort sort = Sort.by(patients.size()).ascending();
-//        return  doctorRepository.findAll(sort);
-//    }
-//
-//    public int getAmountOfPatients(Doctor doctor){
-//        return doctor.getPatients().size();
-//    }
-
-    public Doctor createDoctor(Doctor doctor, List<Patient> patients) {
-        Doctor newDoc = new Doctor();
-        newDoc.setName(doctor.getName());
-        newDoc.setSurname(doctor.getSurname());
-        newDoc.setType(doctor.getType());
-        newDoc.setExperience(doctor.getExperience());
-        newDoc.setPatients(patients);
-        return doctorRepository.save(newDoc);
+    public List<Doctor> sortedList(String field, String direction) {
+        Sort sort = direction.equals(Sort.Direction.ASC.name()) ?
+                Sort.by(field).ascending():
+                Sort.by(field).descending();
+        return doctorRepository.findAll(sort);
     }
-
 }

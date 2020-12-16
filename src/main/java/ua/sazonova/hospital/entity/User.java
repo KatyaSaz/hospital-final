@@ -31,6 +31,11 @@ public class User implements UserDetails {
     @Column(name= "more_info_id")
     private Long idMoreInfo;
 
+    public void setPassword(String password) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder(ENCODING_STRENGTH);
+        this.password = bcrypt.encode(password);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<>(Collections.singleton(role));
@@ -39,11 +44,6 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
-    }
-
-    public void setPassword(String password) {
-        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder(ENCODING_STRENGTH);
-        this.password = bcrypt.encode(password);
     }
 
     @Override

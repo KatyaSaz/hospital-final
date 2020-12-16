@@ -1,11 +1,9 @@
 package ua.sazonova.hospital.entity;
 
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 import ua.sazonova.hospital.entity.enam.Gender;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -26,7 +24,6 @@ public class Patient{
     @Column(name="year")
     private int year;
     private String phone;
-    //@ManyToOne
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "doc_id", nullable=false)
     private Doctor doctor;

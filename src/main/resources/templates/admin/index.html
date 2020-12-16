@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
-
 </head>
 <style>
     li {
-        list-style-type: none; /* Убираем маркеры */
+        list-style-type: none; /* no markers in list */
     }
 </style>
 <body>
@@ -23,10 +22,7 @@
         <li><a th:href="@{/admin/patients}">Show all patients</a></li>
         <li><a th:href="@{/admin/doctors}">Show all doctors</a></li>
         <li><a th:href="@{/admin/non-reg}">Show not registered users</a></li>
-<!--        <li><a th:href="@{/admin/doctor/new}">Add new doctor</a></li>-->
     </ul>
 </div>
-
-
 </body>
 </html>

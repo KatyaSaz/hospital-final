@@ -3,6 +3,7 @@ package ua.sazonova.hospital.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ua.sazonova.hospital.entity.Doctor;
 import ua.sazonova.hospital.entity.Patient;
 import ua.sazonova.hospital.entity.User;
 import ua.sazonova.hospital.repository.PatientRepository;
@@ -18,14 +19,14 @@ public class PatientService {
     private UserService userService;
     private User user;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Autowired
     public PatientService(PatientRepository patientRepository, UserService userService) {
         this.patientRepository = patientRepository;
         this.userService = userService;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Transactional
@@ -67,6 +68,13 @@ public class PatientService {
 
     public List<Patient> getNonActive(){
         return patientRepository.findPatientsByUserIsActive(false);
+    }
+
+    public List<Patient> sortedList(String field, String direction) {
+        Sort sort = direction.equals(Sort.Direction.ASC.name()) ?
+                Sort.by(field).ascending():
+                Sort.by(field).descending();
+        return patientRepository.findAll(sort);
     }
 
     public List<Patient> getSortedPatientsOfOneDoctor(Long docId, String field, String direction){

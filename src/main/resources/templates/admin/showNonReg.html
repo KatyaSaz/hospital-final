@@ -21,7 +21,6 @@
 <br/>
 <h3>Doctors </h3>
 <div th:each="doctor : ${doctors}">
-
     <a th:href="@{/admin/doctors/{id}(id=${doctor.getId()})}"
        th:text="${doctor.getName() + '   ' + doctor.getSurname()}">user</a>
     <form th:method="POST" th:action="@{/admin/register/doctor/{id}(id=${doctor.getId()})}">
@@ -34,12 +33,10 @@
 <div class="patient"  th:each="patient : ${patients}">
     <a th:href="@{/admin/patients/{id}(id=${patient.getId()})}"
        th:text="${patient.getName() + '   ' + patient.getSurname()}">user</a>
-
     <form th:method="POST" th:action="@{/admin/register/patient/{id}(id=${patient.getId()})}">
         <input type="submit" value="Register"/>
     </form>
     <br/>
 </div>
-
 </body>
 </html>
