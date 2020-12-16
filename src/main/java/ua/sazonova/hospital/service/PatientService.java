@@ -63,11 +63,21 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
+    public List<Patient> getNonActive(){
+        return patientRepository.findPatientsByUserIsActive(false);
+    }
+
     public List<Patient> sortedList(String field, String direction){
         Sort sort = direction.equals(Sort.Direction.ASC.name())?
                 Sort.by(field).ascending():
                 Sort.by(field).descending();
         return patientRepository.findAll(sort);
+    }
+
+    public void updateIsActive(Long id){
+        Patient patient = getById(id);
+        patient.getUser().setIsActive(true);
+        save(patient);
     }
 
 //    public Page<Book> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection){

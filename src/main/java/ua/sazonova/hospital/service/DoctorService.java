@@ -75,6 +75,16 @@ public class DoctorService {
         return  doctorRepository.findByType(type);
     }
 
+    public List<Doctor> getNonActive(){
+        return doctorRepository.findDoctorsByUserIsActive(false);
+    }
+
+    public void updateIsActive(Long id){
+        Doctor doctor = getById(id);
+        doctor.getUser().setIsActive(true);
+        save(doctor);
+    }
+
 //    public List<Doctor> sortByAmountOfPatients(){
 //        List<Doctor> doctors = doctorRepository.findAll();
 //        List<Doctor> sortedDoctors = Collections.sort(

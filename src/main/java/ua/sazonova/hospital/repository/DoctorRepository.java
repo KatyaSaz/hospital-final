@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     List<Doctor> findByType(DoctorType type);
+
+    List<Doctor> findDoctorsByUserIsActive(Boolean isActive);
 }

@@ -115,7 +115,24 @@ public class AdminController {
         return "redirect:/admin/patients";
     }
 
+    @GetMapping("/non-reg")
+    public String showNonRegisteredUsers(Model model){
+        model.addAttribute("doctors", doctorService.getNonActive());
+        model.addAttribute("patients", patientService.getNonActive());
+        return "admin/showNonReg";
+    }
 
+    @PostMapping("/register/doctor/{id}")
+    public String registerDoctor(@PathVariable("id") Long id){
+        doctorService.updateIsActive(id);
+        return "redirect:/admin/doctors";
+    }
+
+    @PostMapping("/register/patient/{id}")
+    public String registerPatient(@PathVariable("id") Long id){
+        patientService.updateIsActive(id);
+        return "redirect:/admin/patients";
+    }
 
 
 //    @GetMapping("/patient/new")
