@@ -2,19 +2,19 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>My Info</title>
+    <title>[[#{my.info}]]</title>
 </head>
 <body>
 <div class="container">
     <form action="/logout" method="POST">
-        <button type="submit">Logout</button>
+        <button type="submit">[[#{logout}]]</button>
     </form>
 </div>
-<h3>Information about me</h3>
-<p th:text="${'Name:       ' + doctor.getName()+' '+doctor.getSurname()}">VALUE</p>
-<p th:text="${'Doctor type: ' + doctor.getType()}">VALUE</p>
-<p th:text="${'Experience:   ' + doctor.getExperience() + '  years'}">VALUE</p>
+<h3>[[#{doctor.title.info}]]</h3>
+<p th:text="#{my.name} + ${doctor.getName()+' '+doctor.getSurname()}">VALUE</p>
+<p th:text="#{doctor.type} + ${doctor.getType()}">VALUE</p>
+<p th:text="#{doctor.experience} + ${doctor.getExperience()} + #{doctor.experience.years}">VALUE</p>
 <br/>
-<a th:href="@{/doctor/patients}">-->Show my patients<--</a>
+<a th:href="@{/doctor/patients}">-->[[#{doctor.show.my.patients}]]<--</a>
 </body>
 </html>

@@ -43,7 +43,8 @@ public class DoctorController {
 
     @GetMapping("/patients")
     public String showAllMyPatients(Model model){
-        model.addAttribute("patients", currentDoc.getPatients());
+
+        model.addAttribute("patients", patientService.getPatientsOfOneDoctor(currentDoc.getId()));
         model.addAttribute("doctor", currentDoc);
         return "doctor/showMyPatients";
     }

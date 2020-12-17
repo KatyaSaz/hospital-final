@@ -2,36 +2,36 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8" >
-    <title>My patients</title>
+    <title>[[#{doc.show.patients.title}]]</title>
 </head>
 <body>
 <div class="topMenu">
     <div class="logOut" style="float:left;">
         <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
+            <button type="submit">[[#{logout}]]</button>
         </form>
     </div>
     <div class="goBack" style="float:left;">
         <form action="/doctor" method="GET">
-            <button type="submit">Back to main page</button>
+            <button type="submit">[[#{back.to.main.button}]]</button>
         </form>
     </div>
 </div>
 <br/>
 
-<h3>My patients</h3>
+<h3>[[#{doc.show.patients.title}]]</h3>
 <form th:method="POST" th:action="@{/doctor/patients/sort}">
     <select id="field" name="field">
         <option value=""></option>
-        <option value="name" >name</option>
-        <option value="year">year</option>
+        <option value="name" >[[#{pat.sort.value.name}]]</option>
+        <option value="year">[[#{pat.sort.value.year}]]</option>
     </select>
     <select id="direction" name="direction">
         <option value=""></option>
-        <option value="ASC">ascending</option>
-        <option value="DESC" >descending</option>
+        <option value="ASC">[[#{sort.value.direction.asc}]]</option>
+        <option value="DESC" >[[#{sort.value.direction.desc}]]</option>
     </select>
-    <button type="submit">Sort</button>
+    <button type="submit">[[#{sort.button}]]</button>
 </form>
 
 <br/>

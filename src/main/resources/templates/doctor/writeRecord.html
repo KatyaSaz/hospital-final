@@ -2,24 +2,22 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Card</title>
+    <title>[[#{card.title}]]</title>
 </head>
 <body>
-<h2>Create new card record</h2>
-
+<h2>[[#{card.create.title}]]</h2>
 <form th:method="POST" th:action="@{/doctor/patients/{id}/record(id=${ID})}" th:object="${record}">
-    <br/>
-    <label for="description">Enter description: </label>
+    <label for="description">[[#{card.description}]]</label>
     <textarea th:field="*{description}" id="description"/>
     <br/>
-    <label for="type">Record type: </label>
+    <label for="type">[[#{card.record.type}]]</label>
     <select th:field="*{recordType}" id="type">
-        <option value="Direction">Direction</option>
-        <option value="Execution">Execution</option>
-        <option value="Diagnosis">Diagnosis</option>
+        <option value="Direction">[[#{record.type.direction}]]</option>
+        <option value="Execution">[[#{record.type.execution}]]</option>
+        <option value="Diagnosis">[[#{record.type.diagnosis}]]</option>
     </select>
     <br/>
-    <input type="submit" value="Add record"/>
+    <input type="submit" th:value="#{record.add.button}"/>
     <br/>
 </form>
 </body>

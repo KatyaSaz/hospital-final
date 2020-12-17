@@ -69,6 +69,10 @@ public class PatientService {
         return patientRepository.findPatientsByUserIsActive(false);
     }
 
+    public List<Patient> getPatientsOfOneDoctor(Long docId){
+       return patientRepository.getAllByDoctor_IdEquals(docId);
+    }
+
     public List<Patient> sortedList(String field, String direction) {
         Sort sort = direction.equals(Sort.Direction.ASC.name()) ?
                 Sort.by(field).ascending():
