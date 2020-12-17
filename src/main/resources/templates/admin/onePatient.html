@@ -2,36 +2,33 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Patient</title>
+    <title>[[#{one.patient.title}]]</title>
 </head>
 <div class="topMenu">
     <div class="logOut" style="float:left;">
         <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
+            <button type="submit">[[#{logout}]]</button>
         </form>
     </div>
     <div class="goBack" style="float:left;">
         <form action="/admin" method="GET">
-            <button type="submit">Back to main page</button>
+            <button type="submit">[[#{back.to.main.button}]]</button>
         </form>
     </div>
 </div>
 <br/>
-<p th:text="${'Name:       ' + patient.getName()+' '+patient.getSurname()}">VALUE</p>
-<p th:text="${'Gender:     ' + patient.getGender()}">VALUE</p>
-<p th:text="${'Birth year: ' + patient.getYear()}">VALUE</p>
-<p th:text="${'Phone:      ' + patient.getPhone()}">VALUE</p>
-<p th:text="${'Doctor:     ' + (
-(patient.getDoctor() == null) ?
-'-' :
-(patient.getDoctor().getName()+' '+patient.getDoctor().getSurname())
-)}">VALUE</p>
+<p th:text="#{my.name} + ${patient.getName()+' '+patient.getSurname()}">VALUE</p>
+<p th:text="#{patient.gender} + ${patient.getGender()}">VALUE</p>
+<p th:text="#{patient.year} + ${patient.getYear()}">VALUE</p>
+<p th:text="#{patient.phone} + ${patient.getPhone()}">VALUE</p>
+<p th:text="#{patient.doctor} + ${patient.getDoctor().getName()+' '+patient.getDoctor().getSurname()}">VALUE</p>
 <br/>
-<p>---> RECORDS IN CARD <---</p>
+<br/>
+<p>---> [[#{patient.record.title}]] <---</p>
 <p th:if="${patient.getRecords().size() == 0}">There is no records in the card yet</p>
 <div th:each="record : ${patient.getRecords()}">
-    <p th:text="${'Record Type:  ' + record.getRecordType()}">Record</p>
-    <p th:text="${'Description:  ' + record.getDescription()}">Description</p>
+    <p th:text="#{patient.record.type} + ${record.getRecordType()}"></p>
+    <p th:text="#{patient.record.description} + ${record.getDescription()}"></p>
     <br/>
 </div>
 </body>

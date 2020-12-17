@@ -13,7 +13,7 @@
 <h3>[[#{doctor.title.info}]]</h3>
 <p th:text="#{my.name} + ${doctor.getName()+' '+doctor.getSurname()}">VALUE</p>
 <p th:text="#{doctor.type} + ${doctor.getType()}">VALUE</p>
-<p th:text="#{doctor.experience} + ${doctor.getExperience()} + #{doctor.experience.years}">VALUE</p>
+<p th:text="#{doctor.experience} + ${doctor.getExperience()+' '} + #{doctor.experience.years}">VALUE</p>
 <br/>
 <a th:href="@{/doctor/patients}">-->[[#{doctor.show.my.patients}]]<--</a>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>[[#{admin.index.title}]]</title>
 </head>
 <style>
     li {
@@ -12,16 +12,16 @@
 <body>
 <div class="container">
     <form action="/logout" method="POST">
-        <button type="submit">Logout</button>
+        <button type="submit">[[#{logout}]]</button>
     </form>
 </div>
-<h3>Administrator main page</h3>
+<h3>[[#{admin.index.main.page}]]</h3>
 
 <div id="menu">
     <ul>
-        <li><a th:href="@{/admin/patients}">Show all patients</a></li>
-        <li><a th:href="@{/admin/doctors}">Show all doctors</a></li>
-        <li><a th:href="@{/admin/non-reg}">Show not registered users</a></li>
+        <li><a th:href="@{/admin/patients}">[[#{admin.index.menu.all.patients}]]</a></li>
+        <li><a th:href="@{/admin/doctors}">[[#{admin.index.menu.all.doctors}]]</a></li>
+        <li><a th:href="@{/admin/non-reg}">[[#{admin.index.menu.all.non.reg}]]</a></li>
     </ul>
 </div>
 </body>

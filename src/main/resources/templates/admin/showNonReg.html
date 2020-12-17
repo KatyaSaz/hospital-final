@@ -2,39 +2,39 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Not registered</title>
+    <title>[[#{admin.non.reg.title}]]</title>
 </head>
 
 <body>
 <div class="topMenu">
     <div class="logOut" style="float:left;">
         <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
+            <button type="submit">[[#{logout}]]</button>
         </form>
     </div>
     <div class="goBack" style="float:left;">
         <form action="/admin" method="GET">
-            <button type="submit">Back to main page</button>
+            <button type="submit">[[#{back.to.main.button}]]</button>
         </form>
     </div>
 </div>
 <br/>
-<h3>Doctors </h3>
+<h3>[[#{admin.non.reg.doctors}]]</h3>
 <div th:each="doctor : ${doctors}">
     <a th:href="@{/admin/doctors/{id}(id=${doctor.getId()})}"
        th:text="${doctor.getName() + '   ' + doctor.getSurname()}">user</a>
     <form th:method="POST" th:action="@{/admin/register/doctor/{id}(id=${doctor.getId()})}">
-        <input type="submit" value="Register"/>
+        <input type="submit" th:value="#{admin.register.button}"/>
     </form>
     <br/>
 </div>
 <hr/>
-<h3>Patients </h3>
+<h3>[[#{admin.non.reg.patients}]]</h3>
 <div class="patient"  th:each="patient : ${patients}">
     <a th:href="@{/admin/patients/{id}(id=${patient.getId()})}"
        th:text="${patient.getName() + '   ' + patient.getSurname()}">user</a>
     <form th:method="POST" th:action="@{/admin/register/patient/{id}(id=${patient.getId()})}">
-        <input type="submit" value="Register"/>
+        <input type="submit" th:value="#{admin.register.button}"/>
     </form>
     <br/>
 </div>

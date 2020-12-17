@@ -2,47 +2,47 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Doctors List</title>
+    <title>[[#{admin.all.doctors.title}]]</title>
 </head>
 <body>
 <div class="topMenu">
     <div class="logOut" style="float:left;">
         <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
+            <button type="submit">[[#{logout}]]</button>
         </form>
     </div>
     <div class="goBack" style="float:left;">
         <form action="/admin" method="GET">
-            <button type="submit">Back to main page</button>
+            <button type="submit">[[#{back.to.main.button}]]</button>
         </form>
     </div>
 </div>
 <br/>
-<h3>Full list of doctors </h3>
+<h3>[[#{admin.all.doctors.list}]]</h3>
 
 <form th:method="POST" th:action="@{/admin/doctors/sort}">
     <select id="field" name="field">
         <option value=""></option>
-        <option value="name" >name</option>
-        <option value="experience">experience</option>
+        <option value="name" >[[#{sort.value.name}]]</option>
+        <option value="experience">[[#{doc.sort.value.experience}]]</option>
     </select>
     <select id="direction" name="direction">
         <option value=""></option>
-        <option value="ASC">ascending</option>
-        <option value="DESC" >descending</option>
+        <option value="ASC">[[#{sort.value.direction.asc}]]</option>
+        <option value="DESC" >[[#{sort.value.direction.desc}]]</option>
     </select>
-    <button type="submit">Sort</button>
+    <button type="submit">[[#{sort.button}]]</button>
 </form>
 
 <form th:method="POST" th:action="@{/admin/doctors/search}">
     <select id="type" name="type">
         <option value=""></option>
-        <option value="dermatologist">dermatologist</option>
-        <option value="pediatrician">pediatrician</option>
-        <option value="surgeon">surgeon</option>
-        <option value="optometrist">optometrist</option>
+        <option value="dermatologist">[[#{doc.type.dermatologist}]]</option>
+        <option value="pediatrician">[[#{doc.type.pediatrician}]]</option>
+        <option value="surgeon">[[#{doc.type.surgeon}]]</option>
+        <option value="optometrist">[[#{doc.type.optometrist}]]</option>
     </select>
-    <button type="submit">Find</button>
+    <button type="submit">[[#{doc.find.button}]]</button>
 </form>
 
 <div th:each="doctor : ${doctors}">
@@ -50,7 +50,7 @@
     <a th:href="@{/admin/doctors/{id}(id=${doctor.getId()})}"
        th:text="${doctor.getName() + '   ' + doctor.getSurname()}">user</a>
     <form th:method="POST" th:action="@{/admin/delete/doctor/{id}(id=${doctor.getId()})}">
-        <input type="submit" value="Delete"/>
+        <input type="submit" th:value="#{delete.button}"/>
     </form>
     <br/>
 </div>

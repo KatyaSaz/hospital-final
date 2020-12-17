@@ -2,30 +2,29 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Doctor</title>
+    <title>[[#{one.doctor.title}]]</title>
 </head>
 <body>
 <div class="topMenu">
     <div class="logOut" style="float:left;">
         <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
+            <button type="submit">[[#{logout}]]</button>
         </form>
     </div>
     <div class="goBack" style="float:left;">
         <form action="/admin" method="GET">
-            <button type="submit">Back to main page</button>
+            <button type="submit">[[#{back.to.main.button}]]</button>
         </form>
     </div>
 </div>
 <br/>
-<p th:text="${'Name:       ' + doctor.getName()+' '+doctor.getSurname()}">VALUE</p>
-<p th:text="${'Doctor type: ' + doctor.getType()}">VALUE</p>
-<p th:text="${'Experience:   ' + doctor.getExperience() + '  years'}">VALUE</p>
+<p th:text="#{my.name} + ${doctor.getName()+' '+doctor.getSurname()}">VALUE</p>
+<p th:text="#{doctor.type} + ${doctor.getType()}">VALUE</p>
+<p th:text="#{doctor.experience} + ${doctor.getExperience()+' '} + #{doctor.experience.years}">VALUE</p>
 <br/>
-<p>---> His patients <---</p>
+<p>---> [[#{admin.one.doctor.his.patients}]] <---</p>
 <div th:each="patient : ${doctor.getPatients()}">
     <p th:text="${patient.getName() + '   ' + patient.getSurname()}">user</p>
-
 </div>
 </body>
 </html>
