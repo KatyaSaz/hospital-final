@@ -20,7 +20,9 @@
 <div th:each="record : ${patient.getRecords()}">
     <p th:text="#{patient.record.type} + ${record.getRecordType()}"></p>
     <p th:text="#{patient.record.description} + ${record.getDescription()}"></p>
-    <input th:if="${record.getRecordType().name() == 'Diagnosis'}" type="submit" th:value="#{patient.record.save}"/>
+    <form th:method="POST" th:action="@{/patient/download/{id}(id=${record.getId()})}">
+        <input th:if="${record.getRecordType().name() == 'Diagnosis'}" type="submit" th:value="#{patient.record.save}"/>
+    </form>
     <br/>
 </div>
 </body>
