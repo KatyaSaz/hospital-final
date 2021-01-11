@@ -9,6 +9,7 @@ import ua.sazonova.hospital.repository.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService {
+
     private UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -18,11 +19,11 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
-                .orElseThrow(()->new UsernameNotFoundException("User doesn't exist"));
+                .orElseThrow(() -> new UsernameNotFoundException("User doesn't exist"));
     }
 
-    public void save(User user){
-        if(user.getIsActive()==null){
+    public void save(User user) {
+        if (user.getIsActive() == null) {
             user.setIsActive(false);
         }
         userRepository.save(user);

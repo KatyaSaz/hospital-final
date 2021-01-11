@@ -28,70 +28,69 @@ public class PatientService {
         this.user = user;
     }
 
-    //TODO rename method createPatient
     @Transactional
-    public void create(Patient patient){
+    public void createPatient(Patient patient) {
         userService.save(user);
         patient.setUser(user);
         save(patient);
         find(patient).getUser().setIdMoreInfo(patient.getId());
     }
 
-    public void save(Patient patient){
+    public void save(Patient patient) {
         patientRepository.save(patient);
     }
 
-    public void delete(Patient patient){
+    public void delete(Patient patient) {
         patientRepository.delete(patient);
     }
 
-    public void updateIsActive(Long id){
+    public void updateIsActive(Long id) {
         Patient patient = getById(id);
         patient.getUser().setIsActive(true);
         save(patient);
     }
 
-    public Patient find(Patient patient){
+    public Patient find(Patient patient) {
         return patientRepository.getOne(patient.getId());
     }
 
-    public Patient getById(Long id){
-        if(patientRepository.findById(id).isPresent()){
+    public Patient getById(Long id) {
+        if (patientRepository.findById(id).isPresent()) {
             return patientRepository.findById(id).get();
         }
         return null;
     }
 
-    public List<Patient> getAllPatients(){
+    public List<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
 
-    public List<Patient> getNonActive(){
+    public List<Patient> getNonActive() {
         return patientRepository.findPatientsByUserIsActive(false);
     }
 
-    public List<Patient> getPatientsOfOneDoctor(Long docId){
-       return patientRepository.getAllByDoctor_IdEquals(docId);
+    public List<Patient> getPatientsOfOneDoctor(Long docId) {
+        return patientRepository.getAllByDoctor_IdEquals(docId);
     }
 
     public List<Patient> sortedList(String field, String direction) {
         Sort sort = direction.equals(Sort.Direction.ASC.name()) ?
-                Sort.by(field).ascending():
+                Sort.by(field).ascending() :
                 Sort.by(field).descending();
         return patientRepository.findAll(sort);
     }
 
-    public List<Patient> getSortedPatientsOfOneDoctor(Long docId, String field, String direction){
+    public List<Patient> getSortedPatientsOfOneDoctor(Long docId, String field, String direction) {
         List<Patient> patients = new ArrayList<>();
-        if(field.equals("name")){
-            patients = direction.equals(Sort.Direction.ASC.name())?
-                    patientRepository.getAllByDoctor_IdEqualsOrderByNameAsc(docId):
+        if (field.equals("name")) {
+            patients = direction.equals(Sort.Direction.ASC.name()) ?
+                    patientRepository.getAllByDoctor_IdEqualsOrderByNameAsc(docId) :
                     patientRepository.getAllByDoctor_IdEqualsOrderByNameDesc(docId);
-        }else if(field.equals("year")){
-            patients = direction.equals(Sort.Direction.ASC.name())?
-                    patientRepository.getAllByDoctor_IdEqualsOrderByYearAsc(docId):
+        } else if (field.equals("year")) {
+            patients = direction.equals(Sort.Direction.ASC.name()) ?
+                    patientRepository.getAllByDoctor_IdEqualsOrderByYearAsc(docId) :
                     patientRepository.getAllByDoctor_IdEqualsOrderByYearDesc(docId);
         }
-        return  patients;
+        return patients;
     }
 }

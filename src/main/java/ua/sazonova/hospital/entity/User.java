@@ -26,9 +26,9 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @Column(name= "is_active")
+    @Column(name = "is_active")
     private Boolean isActive;
-    @Column(name= "more_info_id")
+    @Column(name = "more_info_id")
     private Long idMoreInfo;
 
     public void setPassword(String password) {

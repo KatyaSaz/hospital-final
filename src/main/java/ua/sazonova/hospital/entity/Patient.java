@@ -13,19 +13,19 @@ import java.util.List;
 @Entity
 @EqualsAndHashCode
 @Table(name = "patients")
-public class Patient{
+public class Patient {
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @Column(name="year")
+    @Column(name = "year")
     private int year;
     private String phone;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "doc_id", nullable=false)
+    @JoinColumn(name = "doc_id", nullable = false)
     private Doctor doctor;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

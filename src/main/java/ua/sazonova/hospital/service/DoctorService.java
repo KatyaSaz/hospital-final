@@ -8,6 +8,7 @@ import ua.sazonova.hospital.entity.Patient;
 import ua.sazonova.hospital.entity.User;
 import ua.sazonova.hospital.entity.enam.DoctorType;
 import ua.sazonova.hospital.repository.DoctorRepository;
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class DoctorService {
     }
 
     @Transactional
-    public void create(Doctor doctor){
+    public void createDoctor(Doctor doctor) {
         userService.save(user);
         doctor.setUser(user);
         save(doctor);
@@ -42,13 +43,13 @@ public class DoctorService {
 
     public void delete(Doctor doctor) {
         List<Patient> patients = doctor.getPatients();
-        for(Patient pat: patients){
+        for (Patient pat : patients) {
             pat.setDoctor(doctorRepository.getOne(Doctor.DEFAULT_DOCTOR_ID));
         }
         doctorRepository.delete(doctor);
     }
 
-    public void updateIsActive(Long id){
+    public void updateIsActive(Long id) {
         Doctor doctor = getById(id);
         doctor.getUser().setIsActive(true);
         save(doctor);
@@ -69,17 +70,17 @@ public class DoctorService {
         return doctorRepository.findAll();
     }
 
-    public List<Doctor> getNonActive(){
+    public List<Doctor> getNonActive() {
         return doctorRepository.findDoctorsByUserIsActive(false);
     }
 
-    public List<Doctor> getByOneType(DoctorType type){
-        return  doctorRepository.findByType(type);
+    public List<Doctor> getByOneType(DoctorType type) {
+        return doctorRepository.findByType(type);
     }
 
     public List<Doctor> sortedList(String field, String direction) {
         Sort sort = direction.equals(Sort.Direction.ASC.name()) ?
-                Sort.by(field).ascending():
+                Sort.by(field).ascending() :
                 Sort.by(field).descending();
         return doctorRepository.findAll(sort);
     }

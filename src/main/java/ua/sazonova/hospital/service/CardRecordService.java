@@ -18,7 +18,8 @@ public class CardRecordService {
     public void save(CardRecord cardRecord){
         cardRecordRepository.save(cardRecord);
     }
-    public CardRecord getByID(Long id){
+
+    public CardRecord getByID(Long id) {
         return cardRecordRepository.getOne(id);
     }
 }

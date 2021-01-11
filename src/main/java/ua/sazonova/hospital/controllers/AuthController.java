@@ -35,11 +35,11 @@ public class AuthController {
         User user = userRepository.findByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException("User doesn't exists"));
         model.addAttribute("user", user);
-        if(user.getRole().equals(Role.DOCTOR)){
-            return "redirect:/doctor/"+user.getIdMoreInfo();
-        }else if(user.getRole().equals(Role.PATIENT)){
-            return "redirect:/patient/"+user.getIdMoreInfo();
-        }else if(user.getRole().equals(Role.ADMIN)){
+        if (user.getRole().equals(Role.DOCTOR)) {
+            return "redirect:/doctor/" + user.getIdMoreInfo();
+        } else if (user.getRole().equals(Role.PATIENT)) {
+            return "redirect:/patient/" + user.getIdMoreInfo();
+        } else if (user.getRole().equals(Role.ADMIN)) {
             return "redirect:/admin";
         }
         return "redirect:/login";

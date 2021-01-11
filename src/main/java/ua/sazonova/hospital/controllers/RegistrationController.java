@@ -18,7 +18,6 @@ import ua.sazonova.hospital.service.PatientService;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-
     private DoctorService doctorService;
     private PatientService patientService;
 
@@ -29,18 +28,18 @@ public class RegistrationController {
     }
 
     @GetMapping
-    public String showRegFormUser(@ModelAttribute("user") User user){
+    public String showRegFormUser(@ModelAttribute("user") User user) {
         return "reg/user";
     }
 
     @PostMapping
     public String getUserInfo(@ModelAttribute("user") User user,
-                              Model model){
-        if(user.getRole().equals(Role.DOCTOR)){
+                              Model model) {
+        if (user.getRole().equals(Role.DOCTOR)) {
             doctorService.setUser(user);
             model.addAttribute("doctor", new Doctor());
             return "reg/doctor";
-        }else if(user.getRole().equals(Role.PATIENT)){
+        } else if (user.getRole().equals(Role.PATIENT)) {
             patientService.setUser(user);
             model.addAttribute("patient", new Patient());
             return "reg/patient";
@@ -49,15 +48,15 @@ public class RegistrationController {
     }
 
     @PostMapping("/doctor")
-    public String getDoctorInfo(@ModelAttribute("doctor") Doctor doctor){
-        doctorService.create(doctor);
+    public String getDoctorInfo(@ModelAttribute("doctor") Doctor doctor) {
+        doctorService.createDoctor(doctor);
         return "reg/success";
     }
 
     @PostMapping("/patient")
-    public String getPatientInfo(@ModelAttribute("patient") Patient patient){
+    public String getPatientInfo(@ModelAttribute("patient") Patient patient) {
         patient.setDoctor(doctorService.getById(Doctor.DEFAULT_DOCTOR_ID));
-        patientService.create(patient);
+        patientService.createPatient(patient);
         return "reg/success";
     }
 }
