@@ -28,6 +28,7 @@ public class PatientService {
         this.user = user;
     }
 
+    //TODO rename method createPatient
     @Transactional
     public void create(Patient patient){
         userService.save(user);

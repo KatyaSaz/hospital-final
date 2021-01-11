@@ -18,7 +18,7 @@ import java.util.Collections;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-    private static int ENCODING_STRENGTH = 12;
+    private static int ENCODING_STRENGTH = 10;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
